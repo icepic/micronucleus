@@ -8,6 +8,11 @@ ifeq ($(shell uname), Linux)
 	USBLIBS=$(shell libusb-config --libs)
 	EXE_SUFFIX =
 	OSFLAG = -D LINUX
+else ifeq ($(shell uname), OpenBSD)
+        USBFLAGS = `libusb-config --cflags`
+        USBLIBS = `libusb-config --libs`
+        EXE_SUFFIX =
+        OSFLAG = -D OPENBSD
 else ifeq ($(shell uname), Darwin)
 	USBFLAGS=$(shell libusb-config --cflags || libusb-legacy-config --cflags)
 	USBLIBS=$(shell libusb-config --libs || libusb-legacy-config --libs)
